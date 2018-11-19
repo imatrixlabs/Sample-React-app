@@ -1,0 +1,53 @@
+{
+  "name": "AlloactionSystem",
+  "version": "1.0.0",
+  "description": "AlloactionSystem js files",
+  "main": "index.js",
+  "scripts": {
+    "start-js": "cross-env PORT=3006 react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "watch-css": "node-sass-chokidar src/ -o src/ --watch --recursive",
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "prebuild": "npm run create-index && rimraf app/assets/npmed app/assets/javascripts/1*.js app/assets/javascripts/main*.js app/assets/javascripts/runtime*.js app/assets/stylesheets/1*.css app/assets/stylesheets/main*.css",
+    "build": "npm run build-css && react-scripts build",
+    "postbuild": "npm run remove-index && cpx build/static/js/*.js app/assets/javascripts && cpx build/static/css/*.css app/assets/stylesheets",
+    "create-index": "cpy public/500.html public  --no-overwrite  --rename=index.html",
+    "remove-index": "rimraf public/index.html",
+    "test": "npm-run-all -p watch-css test-basic",
+    "test-basic": "react-scripts test",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build",
+    "lint": "esw 'src/javascripts/**/*' --ext [js,jsx]; exit 0",
+    "eject": "react-scripts eject"
+  },
+  "private": true,
+  "author": "Mahesh",
+  "license": "ISC",
+  "dependencies": {`
+    "datatables": "^1.10.18",
+    "gritter": "^1.7.4",
+    "jquery": "^1.12.1",
+    "jquery-ui": "^1.12.1",
+    "jquery-ui-multiselect-widget": "^2.0.2",
+    "jquery-ujs": "^1.2.2",
+    "jquery-validation": "^1.18.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "cpx": "^1.5.0",
+    "cpy": "^7.0.1",
+    "cross-env": "^5.2.0",
+    "del-cli": "^1.1.0",
+    "node-sass": "^4.9.4",
+    "node-sass-chokidar": "^1.3.4",
+    "react-scripts": "^2.0.5",
+    "react-styleguidist": "^7.3.11"
+  }
+}
